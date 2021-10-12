@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+
+:root {
+    --spacing-sm: 4px;
+    --spacing: 8px;
+    --spacing-2: 16px;
+    --spacing-4: 32px;
+    --spacing-8: calc(var(--spacing) * 8);
+    --primary: rgb(245, 150, 43);
+    --light: rgb(255, 252, 249);
+    --paper: rgb(238, 221, 147);
+    --paper-2: rgb(202, 191, 139);
+    --paper-3: rgb(190, 178, 127);
+    --paper-4: rgb(156, 147, 104);
+    --dark: rgb(22, 12, 1);
+    --intermediate: rgb(146, 137, 126);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin:0;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+    font-family:  'Italianno', cursive;
+}
+
+main {
+    margin:auto;
+    --top-margin: 5vh;
+    margin-top: var(--top-margin);
+    height: calc(100vh - var(--top-margin) * 2);
+    aspect-ratio: 3/4;
+    background-color: var(--paper);
+    padding: var(--spacing-8);
+    box-shadow: 10px 0 30px -5px inset var(--intermediate),
+                5px 5px var(--paper-2), 10px 10px var(--paper-3), 15px 15px var(--paper-4), 
+                10px 0 30px -10px var(--intermediate);
+    border:1px solid var(--paper-3);
+    position: relative;
+    translate:50%;
+}
+
+main::before {
+    content:'';
+    position: absolute;
+    inset: 0;
+    background-color: var(--paper);
+    padding: var(--spacing-8);
+    box-shadow: 10px 0 30px -5px inset var(--intermediate),
+                5px 5px var(--paper-2), 10px 10px var(--paper-3), 15px 15px var(--paper-4), 
+                10px 0 30px -10px var(--intermediate);
+    border:1px solid var(--paper-3);
+    translate:-100%;
+    transform: scaleX(-1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, textarea {    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    width: 100%;
+    margin-block-end: var(--spacing-2);
+    padding: var(--spacing);
+}
+
+
+button {
+    width: max-content;
+    background-color: var(--paper-4);
+    color: var(--light);
+    border-radius: 4px;
+    border: none;
+    padding-block: var(--spacing);
+    padding-inline: var(--spacing-2);
+    font-size: 20px;
+}
+
+button:hover {
+    filter: brightness(110%);
+}
+
+button:active {
+    filter: brightness(90%);
+}
+
+
+.stories {
+    display: flex;
+    gap: var(--spacing);
+}
+
+.story {
+    padding: var(--spacing);
+}
