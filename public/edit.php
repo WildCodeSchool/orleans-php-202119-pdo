@@ -1,10 +1,19 @@
 <?php
     require_once '../connec.php';
     require '../src/function.php';
-
+    
     $pdo = new \PDO(DSN, USER, PASSWORD);
-
     $errors = [];
+
+    $id = $_GET['id'];
+    if($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $query = "SELECT * FROM story WHERE id=:id";
+        $statement = $pdo->prepare($query);
+        $statement->bindValue('id', $id);
+        $statement->execute();
+
+        $story = $statement->fetch();
+    }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $story = array_map('trim', $_POST);
@@ -14,17 +23,17 @@
         if(!empty($errors)) {
             var_dump($errors);
         } else {
-            // insert en BDD
-            $query = 'INSERT INTO story (title, author, content) VALUES(:title, :author, :content)';
+            // update en BDD
+            $query = 'UPDATE story SET title=:title, author=:author, content=:content WHERE id=:id';
             $statement = $pdo->prepare($query);
             $statement->bindValue('title', $story['title']);
             $statement->bindValue('author', $story['author']);
             $statement->bindValue('content', $story['content']);
+            $statement->bindValue('id', $id);
 
             $statement->execute();
-            $id = $pdo->lastInsertId();
 
-            header('Location: show.php?id=' . $id);
+            // header('Location: create.php?message=Histoire ajoutée');
         }
     }
 
@@ -53,7 +62,7 @@
 
             <label for="author">Auteur</label>
             <input type="text" id="author" name="author" value="<?= $story['author'] ?? ''?>">
-
+           
             <label for="content">Contenu</label>
             <textarea required id="content" name="content"><?= $story['content'] ?? ''?></textarea>
 

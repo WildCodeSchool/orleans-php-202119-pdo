@@ -26,13 +26,17 @@ $stories = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <h1>Les histoires de père Blaise</h1>
+    <?= $_GET['message'] ?? '' ?>
+
     <div class="stories">
         <?php foreach ($stories as $story) : ?>
-            <div class="story">
-                <h2><?= htmlentities($story['title']) ?></h2>
-                <p><?= htmlentities($story['content']) ?></p>
-                <div>par <?= htmlentities($story['author']) ?></div>
-            </div>
+            <a href="show.php?id=<?= $story['id'] ?>">
+                
+                <div class="story">
+                    <h2><?= htmlentities($story['title']) ?></h2>
+                    <div>par <?= htmlentities($story['author']) ?></div>
+                </div>
+            </a>
         <?php endforeach; ?>
     </div>
 </body>
